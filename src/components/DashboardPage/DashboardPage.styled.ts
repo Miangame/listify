@@ -6,6 +6,7 @@ import { media } from '@/theme/media'
 export const Wrapper = styled.main`
   padding: ${({ theme }) => `${theme.size.units(4)} ${theme.size.units(2)}`};
   width: 100%;
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
 `
 
 export const PageTitle = styled.h1`
