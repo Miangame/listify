@@ -9,5 +9,7 @@ declare module 'next-auth' {
       image: string
       plan: string
     }
+    expiresAt: number
+    refreshToken: string
   }
 }

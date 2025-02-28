@@ -1,0 +1,12 @@
+{
+  "title": "Créer une playlist IA",
+  "textareaLabel": "Décrivez votre playlist",
+  "textareaPlaceholder": "Décrivez l'humeur, le genre ou le thème de votre playlist. Par exemple : 'Chansons entraînantes pour un road trip d'été' ou 'Folk indie relaxant pour un jour de pluie'",
+  "generating": "Génération...",
+  "generate": "Générer la playlist",
+  "generatingPerfectPlaylist": "Génération de la playlist parfaite pour vous... Cela peut prendre une minute.",
+  "importToSpotify": "Importer sur Spotify",
+  "songTitle": "Titre",
+  "songAlbum": "Album",
+  "songDuration": "Durée"
+}

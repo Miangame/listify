@@ -1,12 +1,14 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { getSession } from 'next-auth/react'
+import { getServerSession } from 'next-auth'
 import { SpotifyApi } from '@spotify/web-api-ts-sdk'
+
+import { authOptions } from './auth/[...nextauth]'
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session = await getSession({ req })
+  const session = await getServerSession(req, res, authOptions)
 
   if (!session) {
     return res.status(401).json({ message: 'Unauthorized' })
@@ -15,10 +17,12 @@ export default async function handler(
   const { playlistName, trackUris, playlistDescription } = req.body
 
   try {
-    const spotify = SpotifyApi.withClientCredentials(
-      process.env.SPOTIFY_CLIENT_ID!,
-      process.env.SPOTIFY_CLIENT_SECRET!
-    )
+    const spotify = SpotifyApi.withAccessToken(process.env.SPOTIFY_CLIENT_ID!, {
+      access_token: session.accessToken as string,
+      token_type: 'Bearer',
+      expires_in: session.expiresAt as number,
+      refresh_token: session.refreshToken as string
+    })
 
     const user = await spotify.currentUser.profile()
     const playlist = await spotify.playlists.createPlaylist(user.id, {

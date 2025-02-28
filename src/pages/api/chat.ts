@@ -1,10 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import OpenAI from 'openai'
 import { SpotifyApi } from '@spotify/web-api-ts-sdk'
-import { getSession } from 'next-auth/react'
+import { getServerSession } from 'next-auth'
 
 import { SYSTEM_PROMPT } from '@/constants/prompts'
 import { SpotifyGeneratePlaylistResponse } from '@/types/SpotifyGeneratePlaylistResponse'
+import { authOptions } from './auth/[...nextauth]'
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
@@ -52,7 +53,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<SpotifyGeneratePlaylistResponse | void> {
-  const session = await getSession({ req })
+  const session = await getServerSession(req, res, authOptions)
 
   if (!session) {
     return res
@@ -95,6 +96,8 @@ export default async function handler(
         track.album
       )
     }
+
+    playlist.tracks = playlist.tracks.filter((track) => track.spotify_track)
 
     res.status(200).json(playlist)
   } catch (error) {

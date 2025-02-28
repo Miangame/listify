@@ -1,0 +1,12 @@
+{
+  "title": "Create AI playlist",
+  "textareaLabel": "Describe your playlist",
+  "textareaPlaceholder": "Describe the mood, genre, or theme of your playlist. For example: 'Upbeat songs for a summer road trip' or 'Relaxing indie folk for a rainy day'",
+  "generating": "Generating...",
+  "generate": "Generate playlist",
+  "generatingPerfectPlaylist": "Generating the perfect playlist for you... This may take a minute.",
+  "importToSpotify": "Import to Spotify",
+  "songTitle": "Title",
+  "songAlbum": "Album",
+  "songDuration": "Duration"
+}

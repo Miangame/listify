@@ -16,6 +16,7 @@ declare module 'styled-components' {
       textSecondary: string
       card: string
       border: string
+      danger: string
     }
     transition: {
       standard: (firstProperty?: string, ...restProperties: string[]) => string

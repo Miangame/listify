@@ -1,8 +1,8 @@
-import NextAuth from 'next-auth'
+import NextAuth, { NextAuthOptions } from 'next-auth'
 import SpotifyProvider from 'next-auth/providers/spotify'
 import { SpotifyApi } from '@spotify/web-api-ts-sdk'
 
-export default NextAuth({
+export const authOptions: NextAuthOptions = {
   providers: [
     SpotifyProvider({
       clientId: process.env.SPOTIFY_CLIENT_ID!,
@@ -38,6 +38,9 @@ export default NextAuth({
             ...user,
             plan: spotifyUser.product
           }
+
+          token.expiresAt = account.expires_at
+          token.refreshToken = account.refresh_token
         }
       }
       return token
@@ -46,7 +49,11 @@ export default NextAuth({
     async session({ session, token }) {
       session.accessToken = token.accessToken as string
       session.user = token.user as any
+      session.expiresAt = token.expiresAt as number
+      session.refreshToken = token.refreshToken as string
       return session
     }
   }
-})
+}
+
+export default NextAuth(authOptions)
