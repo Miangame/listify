@@ -3,10 +3,11 @@ import { getSession } from 'next-auth/react'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useEffect, useState } from 'react'
-import { CiClock2, CiSearch } from 'react-icons/ci'
+import { CiClock2 } from 'react-icons/ci'
+import { FaSearch } from 'react-icons/fa'
 import { FaPlus } from 'react-icons/fa6'
-import Swal from 'sweetalert2'
 import { useTheme } from 'styled-components'
+import Swal from 'sweetalert2'
 
 import {
   FormGroup,
@@ -198,7 +199,7 @@ const DashboardPage = () => {
             </>
           ) : (
             <>
-              <CiSearch size={16} />
+              <FaSearch size={16} />
               {t('generate')}
             </>
           )}
