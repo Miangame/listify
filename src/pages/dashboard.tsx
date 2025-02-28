@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/react'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { CiClock2, CiSearch } from 'react-icons/ci'
 import { FaPlus } from 'react-icons/fa6'
 import Swal from 'sweetalert2'
@@ -19,7 +19,9 @@ import {
   PageTitle,
   ResultsHeader,
   ResultsSection,
+  ResultsSubtitle,
   ResultsTitle,
+  ResultsTitleWrapper,
   SongAlbum,
   SongAlbumCover,
   SongArtist,
@@ -28,8 +30,10 @@ import {
   SongItem,
   SongList,
   SongListHeader,
+  SongListHeaderNumber,
   SongNumber,
   SongTitle,
+  StyledCheckbox,
   StyledLoader,
   TextArea,
   TextAreaCounter,
@@ -49,12 +53,34 @@ const DashboardPage = () => {
     SpotifyGeneratePlaylistResponse | undefined
   >()
   const [loading, setLoading] = useState(false)
+  const [selectedTracks, setSelectedTracks] = useState<string[]>([])
+
+  const handleSelectAll = () => {
+    if (selectedTracks.length === response?.tracks.length) {
+      setSelectedTracks([])
+    } else {
+      const tracks = (response?.tracks
+        .map((track) => track.spotify_track?.uri)
+        .filter(Boolean) ?? []) as string[]
+
+      setSelectedTracks(tracks ?? [])
+    }
+  }
+
+  const handleSelectTrack = (uri: string) => () => {
+    if (selectedTracks.includes(uri)) {
+      setSelectedTracks(selectedTracks.filter((track) => track !== uri))
+    } else {
+      setSelectedTracks([...selectedTracks, uri])
+    }
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (e.target.value.length > MAX_PROMPT_LENGTH) return
 
     setPrompt(e.target.value)
   }
+
   const handleGenerate = async () => {
     if (!prompt) return
 
@@ -89,7 +115,7 @@ const DashboardPage = () => {
       body: JSON.stringify({
         playlistName: response?.playlist_name,
         playlistDescription: response?.description,
-        trackUris: response?.tracks.map((track) => track.spotify_track?.uri)
+        trackUris: selectedTracks
       })
     })
 
@@ -99,7 +125,8 @@ const DashboardPage = () => {
         text: t('errorSavingPlaylistText', {
           playlistName: response?.playlist_name
         }),
-        icon: 'error'
+        icon: 'error',
+        theme: 'dark'
       })
       return
     }
@@ -110,7 +137,8 @@ const DashboardPage = () => {
       title: t('playlistSaved'),
       text: t('playlistSavedText', { playlistName: response?.playlist_name }),
       icon: 'success',
-      confirmButtonText: t('ok')
+      confirmButtonText: 'Ok',
+      theme: 'dark'
     }).then(() => {
       window.open(data.playlistUrl, '_blank')
     })
@@ -133,6 +161,14 @@ const DashboardPage = () => {
       }
     })
   }
+
+  useEffect(() => {
+    if (response) {
+      setSelectedTracks(
+        response.tracks.map((track) => track.spotify_track?.uri ?? '')
+      )
+    }
+  }, [response])
 
   return (
     <Wrapper>
@@ -177,7 +213,10 @@ const DashboardPage = () => {
       ) : response ? (
         <ResultsSection $visible={!!response}>
           <ResultsHeader>
-            <ResultsTitle>{response.playlist_name}</ResultsTitle>
+            <ResultsTitleWrapper>
+              <ResultsTitle>{response.playlist_name}</ResultsTitle>
+              <ResultsSubtitle>{response.description}</ResultsSubtitle>
+            </ResultsTitleWrapper>
             <ImportButton onClick={handleImport}>
               <FaPlus size={16} />
               {t('importToSpotify')}
@@ -186,7 +225,14 @@ const DashboardPage = () => {
 
           <SongList>
             <SongListHeader>
-              <div>#</div>
+              <SongListHeaderNumber>
+                <StyledCheckbox
+                  type="checkbox"
+                  checked={selectedTracks.length === response.tracks.length}
+                  onChange={handleSelectAll}
+                />
+                <div>#</div>
+              </SongListHeaderNumber>
               <div>{t('songTitle')}</div>
               <div>{t('songAlbum')}</div>
               <div>{t('songDuration')}</div>
@@ -194,7 +240,16 @@ const DashboardPage = () => {
 
             {response.tracks.map((song, index) => (
               <SongItem key={index}>
-                <SongNumber>{index + 1}</SongNumber>
+                <SongNumber>
+                  <StyledCheckbox
+                    type="checkbox"
+                    checked={selectedTracks.includes(
+                      song.spotify_track?.uri ?? ''
+                    )}
+                    onChange={handleSelectTrack(song.spotify_track?.uri ?? '')}
+                  />
+                  {index + 1}
+                </SongNumber>
                 <SongAlbumCover>
                   <img
                     src={

@@ -127,11 +127,29 @@ export const ResultsHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   margin-bottom: ${({ theme }) => theme.size.units(2)};
+  gap: ${({ theme }) => theme.size.units(2)};
+
+  ${media.greaterThan('md')`
+    flex-direction: row;
+    align-items: flex-end;
+  `}
+`
+
+export const ResultsTitleWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.size.units(1)};
 `
 
 export const ResultsTitle = styled.h2`
   font-size: ${({ theme }) => theme.size.units(3)};
+`
+
+export const ResultsSubtitle = styled.h3`
+  font-size: ${({ theme }) => theme.size.units(1.5)};
 `
 
 export const ImportButton = styled.button`
@@ -204,6 +222,30 @@ export const SongItem = styled.div`
 export const SongNumber = styled.div`
   color: ${(props) => props.theme.colors.textSecondary};
   font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.size.units(1)};
+`
+
+export const StyledCheckbox = styled.input`
+  appearance: none;
+  width: ${({ theme }) => theme.size.units(2)};
+  height: ${({ theme }) => theme.size.units(2)};
+  border: 1px solid ${(props) => props.theme.colors.border};
+  border-radius: ${({ theme }) => theme.size.units(0.5)};
+  background-color: ${(props) => props.theme.colors.card};
+  cursor: pointer;
+
+  &:checked {
+    background-color: ${(props) => props.theme.colors.primary};
+    border-color: ${(props) => props.theme.colors.primary};
+  }
+`
+
+export const SongListHeaderNumber = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.size.units(1)};
 `
 
 export const SongInfo = styled.div`
