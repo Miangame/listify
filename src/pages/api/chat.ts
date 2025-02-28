@@ -6,6 +6,7 @@ import { getServerSession } from 'next-auth'
 import { SYSTEM_PROMPT } from '@/constants/prompts'
 import { SpotifyGeneratePlaylistResponse } from '@/types/SpotifyGeneratePlaylistResponse'
 import { authOptions } from './auth/[...nextauth]'
+import { prisma } from '@/lib/prisma'
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
@@ -65,7 +66,19 @@ export default async function handler(
     return res.status(405).json({ message: 'Method Not Allowed' })
   }
 
-  const { prompt } = req.body
+  const { prompt, email } = req.body
+
+  const user = await prisma.user.findUnique({
+    where: { email }
+  })
+
+  if (!user) {
+    return res.status(404).json({ message: 'User not found' })
+  }
+
+  if (user.tokens <= 0) {
+    return res.status(403).json({ message: 'Not enough tokens' })
+  }
 
   const randomFactor = Math.random().toString(36).substring(7) // Genera un string aleatorio
   const modifiedPrompt = `${prompt} [Unique ID: ${randomFactor}]`
@@ -98,6 +111,11 @@ export default async function handler(
     }
 
     playlist.tracks = playlist.tracks.filter((track) => track.spotify_track)
+
+    await prisma.user.update({
+      where: { email },
+      data: { tokens: user.tokens - 1 }
+    })
 
     res.status(200).json(playlist)
   } catch (error) {

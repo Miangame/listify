@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next'
-import { getSession } from 'next-auth/react'
+import { getSession, useSession } from 'next-auth/react'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useEffect, useState } from 'react'
@@ -48,6 +48,7 @@ const MAX_PROMPT_LENGTH = 150
 const DashboardPage = () => {
   const { t } = useTranslation('dashboard')
   const theme = useTheme()
+  const { data: session } = useSession()
 
   const [prompt, setPrompt] = useState('')
   const [response, setResponse] = useState<
@@ -92,7 +93,7 @@ const DashboardPage = () => {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt })
+        body: JSON.stringify({ prompt, email: session?.user?.email })
       })
 
       if (!res.ok) {

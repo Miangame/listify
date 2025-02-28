@@ -8,6 +8,7 @@ declare module 'next-auth' {
       email: string
       image: string
       plan: string
+      tokens: number
     }
     expiresAt: number
     refreshToken: string

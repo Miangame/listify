@@ -2,6 +2,8 @@ import NextAuth, { NextAuthOptions } from 'next-auth'
 import SpotifyProvider from 'next-auth/providers/spotify'
 import { SpotifyApi } from '@spotify/web-api-ts-sdk'
 
+import { prisma } from '@/lib/prisma'
+
 export const authOptions: NextAuthOptions = {
   providers: [
     SpotifyProvider({
@@ -18,6 +20,24 @@ export const authOptions: NextAuthOptions = {
     updateAge: 60 * 60
   },
   callbacks: {
+    async signIn({ user }) {
+      const existingUser = await prisma.user.findUnique({
+        where: { email: user.email! }
+      })
+
+      if (!existingUser) {
+        await prisma.user.create({
+          data: {
+            email: user.email!,
+            name: user.name,
+            tokens: 10
+          }
+        })
+      }
+
+      return true
+    },
+
     async jwt({ token, account, user }) {
       if (account) {
         token.accessToken = account.access_token
@@ -51,6 +71,15 @@ export const authOptions: NextAuthOptions = {
       session.user = token.user as any
       session.expiresAt = token.expiresAt as number
       session.refreshToken = token.refreshToken as string
+
+      const dbUser = await prisma.user.findUnique({
+        where: { email: session.user?.email! }
+      })
+
+      if (dbUser && session.user) {
+        session.user.tokens = dbUser.tokens
+      }
+
       return session
     }
   }
