@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import OpenAI from 'openai'
 import { SpotifyApi } from '@spotify/web-api-ts-sdk'
+import { getSession } from 'next-auth/react'
 
 import { SYSTEM_PROMPT } from '@/constants/prompts'
 import { SpotifyGeneratePlaylistResponse } from '@/types/SpotifyGeneratePlaylistResponse'
@@ -51,6 +52,14 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<SpotifyGeneratePlaylistResponse | void> {
+  const session = await getSession({ req })
+
+  if (!session) {
+    return res
+      .status(401)
+      .json({ message: 'Unauthorized. Please log in with Spotify.' })
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method Not Allowed' })
   }

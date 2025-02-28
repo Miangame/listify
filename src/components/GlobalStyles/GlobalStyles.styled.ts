@@ -1,19 +1,19 @@
-import { Poppins, Roboto } from 'next/font/google'
+import { Inter, Montserrat } from 'next/font/google'
 import { createGlobalStyle } from 'styled-components'
 
-const poppins = Poppins({
+const inter = Inter({
   subsets: ['latin'],
   weight: ['400', '600']
 })
 
-const roboto = Roboto({
+const montserrat = Montserrat({
   subsets: ['latin'],
-  weight: ['400', '700']
+  weight: ['400', '600']
 })
 
 export const GlobalStyles = createGlobalStyle<{ $isDarkMode?: boolean }>`
   html, body {
-    font-family: ${poppins.style.fontFamily}, sans-serif;
+    font-family: ${inter.style.fontFamily}, sans-serif;
   }
 
   body {
@@ -21,6 +21,8 @@ export const GlobalStyles = createGlobalStyle<{ $isDarkMode?: boolean }>`
     flex-direction: column;
     min-height: 100vh;
     overscroll-behavior: none;
+    background-color: ${(props) => props.theme.colors.background};
+    color: ${(props) => props.theme.colors.text};
   }
 
   #__next {
@@ -28,12 +30,12 @@ export const GlobalStyles = createGlobalStyle<{ $isDarkMode?: boolean }>`
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: ${poppins.style.fontFamily}, sans-serif;
+    font-family: ${montserrat.style.fontFamily}, sans-serif;
     font-weight: 600;
   }
 
   padding, span, li {
-    font-family: ${roboto.style.fontFamily}, sans-serif;
+    font-family: ${inter.style.fontFamily}, sans-serif;
     font-weight: 400;
   }
 `

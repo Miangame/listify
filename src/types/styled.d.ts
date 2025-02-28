@@ -9,12 +9,13 @@ declare module 'styled-components' {
     }
     colors: {
       primary: string
-      primaryDark: string
-      borderGray: string
-      borderLightGray: string
-      backgroundGray: string
-      textLight: string
-      white: string
+      secondary: string
+      accent: string
+      background: string
+      text: string
+      textSecondary: string
+      card: string
+      border: string
     }
     transition: {
       standard: (firstProperty?: string, ...restProperties: string[]) => string
