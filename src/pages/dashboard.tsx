@@ -1,5 +1,6 @@
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/react'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 const DashboardPage = () => {
   // const [prompt, setPrompt] = useState('')
@@ -51,7 +52,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   return {
-    props: {}
+    props: {
+      ...(await serverSideTranslations(context.locale ?? 'en', [
+        'common',
+        'head',
+        'footer'
+      ]))
+    }
   }
 }
 

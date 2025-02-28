@@ -8,6 +8,10 @@ export const Wrapper = styled.footer`
   text-align: center;
   color: ${(props) => props.theme.colors.textSecondary};
   font-size: 0.875rem;
+
+  a {
+    color: ${(props) => props.theme.colors.textSecondary};
+  }
 `
 
 export const FooterContent = styled.div`

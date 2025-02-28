@@ -33,7 +33,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       ...(await serverSideTranslations(context.locale ?? 'en', [
         'common',
         'head',
-        'landing'
+        'landing',
+        'footer'
       ]))
     }
   }
