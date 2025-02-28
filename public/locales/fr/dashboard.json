@@ -8,5 +8,13 @@
   "importToSpotify": "Importer sur Spotify",
   "songTitle": "Titre",
   "songAlbum": "Album",
-  "songDuration": "Durée"
+  "songDuration": "Durée",
+  "confirmAlertTitle": "Êtes-vous sûr ?",
+  "confirmAlertText": "Vous allez importer la playlist '{{playlistName}}' sur votre compte Spotify.",
+  "confirmAlertConfirmButtonText": "Oui, importer",
+  "confirmAlertCancelButtonText": "Annuler",
+  "playlistSaved": "Playlist enregistrée !",
+  "playlistSavedText": "Votre playlist '{{playlistName}}' a été enregistrée sur votre compte Spotify.",
+  "errorSavingPlaylist": "Erreur lors de l'enregistrement de la playlist",
+  "errorSavingPlaylistText": "Une erreur s'est produite lors de l'enregistrement de votre playlist '{{playlistName}}'. Veuillez réessayer."
 }

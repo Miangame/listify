@@ -120,7 +120,6 @@ export const LoadingText = styled.div`
 export const ResultsSection = styled.section<{ $visible: boolean }>`
   opacity: ${(props) => (props.$visible ? 1 : 0)};
   height: ${(props) => (props.$visible ? 'auto' : 0)};
-  overflow: hidden;
   transition: ${({ theme }) => theme.transition.standard()};
 `
 

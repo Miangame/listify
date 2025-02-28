@@ -5,6 +5,8 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useState } from 'react'
 import { CiClock2, CiSearch } from 'react-icons/ci'
 import { FaPlus } from 'react-icons/fa6'
+import Swal from 'sweetalert2'
+import { useTheme } from 'styled-components'
 
 import {
   FormGroup,
@@ -40,6 +42,7 @@ const MAX_PROMPT_LENGTH = 150
 
 const DashboardPage = () => {
   const { t } = useTranslation('dashboard')
+  const theme = useTheme()
 
   const [prompt, setPrompt] = useState('')
   const [response, setResponse] = useState<
@@ -78,8 +81,9 @@ const DashboardPage = () => {
 
     setLoading(false)
   }
-  const handleImport = async () => {
-    await fetch('/api/savePlaylist', {
+
+  const savePlaylist = async () => {
+    const res = await fetch('/api/savePlaylist', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -87,6 +91,46 @@ const DashboardPage = () => {
         playlistDescription: response?.description,
         trackUris: response?.tracks.map((track) => track.spotify_track?.uri)
       })
+    })
+
+    if (!res.ok) {
+      Swal.fire({
+        title: t('errorSavingPlaylist'),
+        text: t('errorSavingPlaylistText', {
+          playlistName: response?.playlist_name
+        }),
+        icon: 'error'
+      })
+      return
+    }
+
+    const data = await res.json()
+
+    Swal.fire({
+      title: t('playlistSaved'),
+      text: t('playlistSavedText', { playlistName: response?.playlist_name }),
+      icon: 'success',
+      confirmButtonText: t('ok')
+    }).then(() => {
+      window.open(data.playlistUrl, '_blank')
+    })
+  }
+
+  const handleImport = async () => {
+    Swal.fire({
+      title: t('confirmAlertTitle'),
+      text: t('confirmAlertText', { playlistName: response?.playlist_name }),
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: t('confirmAlertConfirmButtonText'),
+      cancelButtonText: t('confirmAlertCancelButtonText'),
+      confirmButtonColor: theme.colors.primary,
+      cancelButtonColor: theme.colors.danger,
+      theme: 'dark'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        savePlaylist()
+      }
     })
   }
 

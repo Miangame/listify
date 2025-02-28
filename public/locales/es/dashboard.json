@@ -8,5 +8,13 @@
   "importToSpotify": "Importar a Spotify",
   "songTitle": "Título",
   "songAlbum": "Álbum",
-  "songDuration": "Duración"
+  "songDuration": "Duración",
+  "confirmAlertTitle": "¿Estás seguro?",
+  "confirmAlertText": "Importarás la lista de reproducción '{{playlistName}}' a tu cuenta de Spotify.",
+  "confirmAlertConfirmButtonText": "Sí, importar",
+  "confirmAlertCancelButtonText": "Cancelar",
+  "playlistSaved": "Lista de reproducción guardada",
+  "playlistSavedText": "Tu lista de reproducción '{{playlistName}}' se ha guardado en tu cuenta de Spotify.",
+  "errorSavingPlaylist": "Error al guardar la lista de reproducción",
+  "errorSavingPlaylistText": "Hubo un error al guardar tu lista de reproducción '{{playlistName}}'. Por favor, inténtalo de nuevo."
 }
