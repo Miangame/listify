@@ -282,6 +282,14 @@ const DashboardPage = () => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context)
 
+  const translations = await serverSideTranslations(context.locale ?? 'en', [
+    'common',
+    'head',
+    'header',
+    'dashboard',
+    'footer'
+  ])
+
   if (!session) {
     return {
       redirect: {
@@ -293,13 +301,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-      ...(await serverSideTranslations(context.locale ?? 'en', [
-        'common',
-        'head',
-        'header',
-        'dashboard',
-        'footer'
-      ]))
+      ...translations
     }
   }
 }
