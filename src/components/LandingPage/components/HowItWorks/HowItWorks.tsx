@@ -31,7 +31,7 @@ export const HowItWorks = () => {
 
   return (
     <Wrapper>
-      <SectionTitle>How It Works</SectionTitle>
+      <SectionTitle>{t('howItWorksTitle')}</SectionTitle>
       <StepsContainer>
         {STEPS.map((step, index) => (
           <Step key={index}>
