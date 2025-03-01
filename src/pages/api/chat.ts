@@ -1,54 +1,16 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import OpenAI from 'openai'
-import { SpotifyApi } from '@spotify/web-api-ts-sdk'
 import { getServerSession } from 'next-auth'
+import OpenAI from 'openai'
 
 import { SYSTEM_PROMPT } from '@/constants/prompts'
+import { prisma } from '@/lib/prisma'
+import { SpotifyService } from '@/services/SpotifyService'
 import { SpotifyGeneratePlaylistResponse } from '@/types/SpotifyGeneratePlaylistResponse'
 import { authOptions } from './auth/[...nextauth]'
-import { prisma } from '@/lib/prisma'
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 })
-
-const spotifyApi = SpotifyApi.withClientCredentials(
-  process.env.SPOTIFY_CLIENT_ID!,
-  process.env.SPOTIFY_CLIENT_SECRET!
-)
-
-const getSpotifyTrack = async (
-  songTitle: string,
-  artist: string,
-  album: string
-) => {
-  try {
-    const searchQuery = `track:${songTitle} album:${album}`
-
-    const response = await spotifyApi.search(
-      searchQuery,
-      ['track'],
-      undefined,
-      5
-    )
-
-    if (!response.tracks.items.length) {
-      console.warn(`⚠ No results found for "${songTitle}" by "${artist}"`)
-      return undefined
-    }
-
-    const exactMatch = response.tracks.items.find((track) =>
-      track.artists.some((a) => a.name.toLowerCase() === artist.toLowerCase())
-    )
-
-    const bestMatch = exactMatch || response.tracks.items[0]
-
-    return bestMatch
-  } catch (error) {
-    console.error('❌ Error searching Spotify:', error)
-    return undefined
-  }
-}
 
 export default async function handler(
   req: NextApiRequest,
@@ -103,7 +65,7 @@ export default async function handler(
       JSON.parse(playlistContent)
 
     for (let track of playlist.tracks) {
-      track.spotify_track = await getSpotifyTrack(
+      track.spotify_track = await SpotifyService.getSpotifyTrack(
         track.title,
         track.artist,
         track.album
