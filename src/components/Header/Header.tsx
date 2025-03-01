@@ -128,18 +128,20 @@ export const Header = () => {
         <span>Listify</span>
       </Logo>
       <HeaderRight>
-        <DesktopTokensWrapper>
-          <ShowCreditWrapper>
-            <LuCreditCard size={16} />
-            <span>
-              {t('credits')}: {session?.user?.tokens}
-            </span>
-          </ShowCreditWrapper>
+        {session && (
+          <DesktopTokensWrapper>
+            <ShowCreditWrapper>
+              <LuCreditCard size={16} />
+              <span>
+                {t('credits')}: {session?.user?.tokens}
+              </span>
+            </ShowCreditWrapper>
 
-          <BuyMoreCredits onClick={handleOpenModal}>
-            {t('buyMoreCredits')}
-          </BuyMoreCredits>
-        </DesktopTokensWrapper>
+            <BuyMoreCredits onClick={handleOpenModal}>
+              {t('buyMoreCredits')}
+            </BuyMoreCredits>
+          </DesktopTokensWrapper>
+        )}
         <LanguageSwitcher />
         {!session ? (
           <LoginButton onClick={handleLogin}>
