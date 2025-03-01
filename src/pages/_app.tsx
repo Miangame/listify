@@ -3,6 +3,7 @@ import { appWithTranslation } from 'next-i18next'
 import type { AppProps } from 'next/app'
 import { ThemeProvider } from 'styled-components'
 import { SessionProvider } from 'next-auth/react'
+import Modal from 'react-modal'
 
 import { GlobalStyles } from '../components/GlobalStyles/GlobalStyles.styled'
 import { Head } from '../components/Head/Head'
@@ -35,5 +36,7 @@ const App = ({ Component, pageProps }: AppProps) => {
     </SessionProvider>
   )
 }
+
+Modal.setAppElement('#__next')
 
 export default appWithTranslation(App)

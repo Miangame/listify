@@ -12,6 +12,7 @@ declare module 'styled-components' {
       secondary: string
       accent: string
       background: string
+      backgroundLight: string
       text: string
       textSecondary: string
       card: string
