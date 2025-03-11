@@ -1,0 +1,14 @@
+{
+  "title": "Termes et Conditions",
+  "intro": "Bienvenue sur notre plateforme. En utilisant notre service, vous acceptez les conditions suivantes.",
+  "usage_title": "Utilisation du Service",
+  "usage_description": "Vous pouvez utiliser la plateforme pour générer des playlists Spotify basées sur l'IA selon les conditions établies dans ces termes.",
+  "payments_title": "Paiements et Tokens",
+  "payments_description": "Les utilisateurs peuvent acheter des tokens pour générer des playlists. Les paiements sont traités en toute sécurité via Stripe.",
+  "data_title": "Données Utilisateur et Confidentialité",
+  "data_description": "Nous ne stockons que les données essentielles pour fournir notre service. Vos données de compte Spotify ne sont pas partagées.",
+  "changes_title": "Modifications des Termes",
+  "changes_description": "Nous nous réservons le droit de modifier ces termes à tout moment. L'utilisation continue implique l'acceptation.",
+  "analytics_title": "Analytique et Suivi",
+  "analytics_description": "Nous utilisons Vercel Analytics pour collecter des données anonymes sur l'utilisation de l'application, telles que les vues de page et les interactions. Cela nous aide à améliorer la plateforme sans stocker d'informations personnelles identifiables."
+}

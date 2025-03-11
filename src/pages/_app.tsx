@@ -14,6 +14,7 @@ import { Layout } from '@/components/Layout/Layout'
 import { LayoutContainer } from '@/components/LayoutContainer/LayoutContainer'
 import { theme } from '@/theme/theme'
 import { Footer } from '@/components/Footer/Footer'
+import { CookiesBanner } from '@/components/CookiesBanner/CookiesBanner'
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
@@ -28,6 +29,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           <Layout>
             <Component {...pageProps} />
           </Layout>
+          <CookiesBanner />
           <Footer />
         </LayoutContainer>
 

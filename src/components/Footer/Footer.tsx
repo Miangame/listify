@@ -27,7 +27,10 @@ export const Footer = () => {
         <FooterLinks>
           <FooterLink href="/terms">{t('terms')}</FooterLink>
           <FooterLink href="/privacy">{t('privacy')}</FooterLink>
-          <FooterLink href="/contact">{t('contact')}</FooterLink>
+          <FooterLink href="/cookies">{t('cookies')}</FooterLink>
+          <FooterLink href="mailto:miangame1@gmail.com">
+            {t('contact')}
+          </FooterLink>
         </FooterLinks>
       </FooterContent>
     </Wrapper>

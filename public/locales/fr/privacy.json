@@ -1,0 +1,16 @@
+{
+  "title": "Politique de Confidentialité",
+  "intro": "Votre confidentialité est importante pour nous. Cette politique explique comment nous collectons, utilisons et protégeons vos données.",
+  "data_collection_title": "Collecte de Données",
+  "data_collection_description": "Nous collectons uniquement les informations nécessaires pour fournir nos services, comme votre email et vos informations d'authentification.",
+  "analytics_title": "Analytique et Suivi",
+  "analytics_description": "Nous utilisons Vercel Analytics pour suivre les interactions anonymes des utilisateurs, telles que les visites de pages et les performances.",
+  "payments_title": "Paiements et Sécurité",
+  "payments_description": "Les paiements sont traités en toute sécurité via Stripe. Nous ne stockons pas vos informations de paiement.",
+  "data_sharing_title": "Partage des Données",
+  "data_sharing_description": "Nous ne partageons pas vos données personnelles avec des tiers, sauf en cas d'obligation légale.",
+  "user_rights_title": "Droits des Utilisateurs",
+  "user_rights_description": "Vous avez le droit de demander l'accès, la correction ou la suppression de vos données.",
+  "changes_title": "Modifications de cette Politique",
+  "changes_description": "Nous nous réservons le droit de mettre à jour cette politique à tout moment. L'utilisation continue du service implique l'acceptation des modifications."
+}

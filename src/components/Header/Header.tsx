@@ -6,6 +6,7 @@ import { IoIosArrowDown, IoIosArrowUp, IoIosClose } from 'react-icons/io'
 import { LuCreditCard, LuMusic } from 'react-icons/lu'
 import Modal from 'react-modal'
 import { useTheme } from 'styled-components'
+import { useRouter } from 'next/router'
 
 import {
   BuyMoreCredits,
@@ -62,6 +63,7 @@ const plans = [
 export const Header = () => {
   const theme = useTheme()
   const { t } = useTranslation('header')
+  const router = useRouter()
 
   const customModalStyles = {
     content: {
@@ -102,6 +104,10 @@ export const Header = () => {
     setIsModalOpen(false)
   }
 
+  const handleLogoClick = () => {
+    router.push('/')
+  }
+
   useEffect(() => {
     const handleCollapseClose = (event: MouseEvent) => {
       if (
@@ -123,7 +129,7 @@ export const Header = () => {
 
   return (
     <Wrapper>
-      <Logo>
+      <Logo onClick={handleLogoClick}>
         <LuMusic size={24} />
         <span>Listify</span>
       </Logo>

@@ -1,0 +1,16 @@
+{
+  "title": "Privacy Policy",
+  "intro": "Your privacy is important to us. This policy explains how we collect, use, and protect your data.",
+  "data_collection_title": "Data Collection",
+  "data_collection_description": "We collect only the necessary information to provide our services, such as your email and authentication details.",
+  "analytics_title": "Analytics and Tracking",
+  "analytics_description": "We use Vercel Analytics to track anonymous user interactions, such as page visits and performance metrics.",
+  "payments_title": "Payments and Security",
+  "payments_description": "Payments are securely processed via Stripe. We do not store your payment information.",
+  "data_sharing_title": "Data Sharing",
+  "data_sharing_description": "We do not share your personal data with third parties, except when required for legal compliance.",
+  "user_rights_title": "User Rights",
+  "user_rights_description": "You have the right to request access, correction, or deletion of your data.",
+  "changes_title": "Changes to this Policy",
+  "changes_description": "We reserve the right to update this policy at any time. Continued use of the service implies acceptance of changes."
+}

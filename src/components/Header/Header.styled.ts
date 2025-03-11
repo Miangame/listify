@@ -14,6 +14,7 @@ export const Logo = styled.div`
   align-items: center;
   gap: ${({ theme }) => theme.size.units(1)};
   font-size: ${({ theme }) => theme.size.units(3)};
+  cursor: pointer;
 
   span {
     font-weight: 700;
