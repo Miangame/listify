@@ -105,7 +105,10 @@ export const Header = () => {
   }
 
   const handleLogoClick = () => {
-    router.push('/')
+    const currentLocale = router.locale
+    router.push('/', '/', {
+      locale: currentLocale
+    })
   }
 
   useEffect(() => {
