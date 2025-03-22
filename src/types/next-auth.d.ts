@@ -1,15 +1,10 @@
 import 'next-auth'
+import { UserSession } from './UserSession'
 
 declare module 'next-auth' {
   interface Session {
     accessToken?: string
-    user?: {
-      name: string
-      email: string
-      image: string
-      plan: string
-      tokens: number
-    }
+    user?: UserSession
     expiresAt: number
     refreshToken: string
   }

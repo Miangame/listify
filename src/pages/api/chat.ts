@@ -64,7 +64,7 @@ export default async function handler(
     const playlist: SpotifyGeneratePlaylistResponse =
       JSON.parse(playlistContent)
 
-    for (let track of playlist.tracks) {
+    for (const track of playlist.tracks) {
       track.spotify_track = await SpotifyService.getSpotifyTrack(
         track.title,
         track.artist,

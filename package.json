@@ -50,7 +50,7 @@
       "prettier --write"
     ],
     "*.{js,ts,tsx}": [
-      "eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
+      "eslint --quiet --fix"
     ]
   }
 }
