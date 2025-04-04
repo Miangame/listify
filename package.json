@@ -15,7 +15,7 @@
     "@vercel/analytics": "^1.5.0",
     "axios": "^1.8.4",
     "i18next": "^24.2.2",
-    "next": "15.1.7",
+    "next": "^15.2.4",
     "next-auth": "^4.24.11",
     "next-i18next": "^15.4.2",
     "openai": "^4.85.4",
