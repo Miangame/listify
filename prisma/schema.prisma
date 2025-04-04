@@ -14,12 +14,16 @@ datasource db {
 }
 
 model User {
-  id            String          @id @default(uuid())
-  email         String          @unique
-  name          String?
-  tokens        Int             @default(5)
-  createdAt     DateTime        @default(now())
-  TokenPurchase TokenPurchase[]
+  id                   String          @id @default(uuid())
+  email                String          @unique
+  name                 String?
+  tokens               Int             @default(5)
+  createdAt            DateTime        @default(now())
+  TokenPurchase        TokenPurchase[]
+  stravaId             String?         @unique
+  stravaAccessToken    String?
+  stravaRefreshToken   String?
+  stravaTokenExpiresAt DateTime?
 }
 
 model TokenPurchase {

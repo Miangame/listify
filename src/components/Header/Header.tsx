@@ -7,6 +7,7 @@ import { LuCreditCard, LuMusic } from 'react-icons/lu'
 import Modal from 'react-modal'
 import { useTheme } from 'styled-components'
 import { useRouter } from 'next/router'
+import { FaStrava } from 'react-icons/fa'
 
 import {
   BuyMoreCredits,
@@ -28,6 +29,7 @@ import {
   ModalPlansWrapper,
   ModalTitle,
   ShowCreditWrapper,
+  StravaLoginButton,
   UserAvatar,
   UserInfo,
   UserName,
@@ -90,6 +92,10 @@ export const Header = () => {
 
   const handleLogout = () => {
     signOut()
+  }
+
+  const handleStravaLogin = () => {
+    router.push('/strava')
   }
 
   const handleToggle = () => {
@@ -185,6 +191,10 @@ export const Header = () => {
                 </BuyMoreCredits>
               </MobileTokensWrapper>
 
+              <StravaLoginButton onClick={handleStravaLogin}>
+                <FaStrava size={16} />
+                <span>Strava</span>
+              </StravaLoginButton>
               <LogoutButton onClick={handleLogout}>
                 <CiLogout size={16} />
                 <span>Logout</span>

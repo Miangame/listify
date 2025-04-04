@@ -8,5 +8,7 @@ export const colors = {
   textSecondary: '#B3B3B3',
   card: 'rgba(255, 255, 255, 0.05)',
   border: 'rgba(255, 255, 255, 0.1)',
-  danger: '#FF0000'
+  danger: '#FF0000',
+  strava: '#FF4F00',
+  stravaDark: '#C92A00'
 }

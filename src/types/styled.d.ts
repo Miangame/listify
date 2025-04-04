@@ -18,6 +18,8 @@ declare module 'styled-components' {
       card: string
       border: string
       danger: string
+      strava: string
+      stravaDark: string
     }
     transition: {
       standard: (firstProperty?: string, ...restProperties: string[]) => string

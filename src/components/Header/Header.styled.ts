@@ -291,3 +291,29 @@ export const ModalPlanButton = styled.button`
     color: ${({ theme }) => theme.colors.primary};
   }
 `
+
+export const StravaLoginButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.size.units(1)};
+  color: ${(props) => props.theme.colors.text};
+  border: none;
+  border-radius: ${({ theme }) => theme.size.units(6.25)};
+  padding: ${({ theme }) => `${theme.size.units(1)} ${theme.size.units(2.5)}`};
+  font-size: ${({ theme }) => theme.size.units(1.5)};
+  font-weight: 600;
+  cursor: pointer;
+  transition: ${({ theme }) => theme.transition.standard()};
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  margin: 0 auto;
+  text-transform: uppercase;
+  background-color: ${(props) => props.theme.colors.strava};
+  color: #fff;
+
+  &:hover {
+    background-color: ${(props) => props.theme.colors.stravaDark};
+  }
+`
